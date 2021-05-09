@@ -1,3 +1,4 @@
 node_modules
 package-lock.json
 server/models/coderacerModel.js
+server/controllers/snippets.txt

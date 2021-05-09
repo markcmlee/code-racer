@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
+import { SnippetContext } from "./SnippetContext";
 
 const CodeSnippet = (props) => {
-  const { chosenSnippet } = props;
+  const { snippet } = useContext(SnippetContext);
+  if (snippet.length === 0) {
+    return (
+      <section className="snippetContainer">
+        <div id="snippet">
+          <p className="crtSpecial" id="noText">
+            Please select a category to get started...
+          </p>
+        </div>
+      </section>
+    );
+  }
   return (
-    <div>
-      <h2>THIS IS TEH CODESNIPPET COMPONENT</h2>
-      <pre>
-        <code class="language-plaintext">{chosenSnippet}</code>
+    <section className="snippetContainer">
+      <pre id="snippet">
+        <code className="crtSpecrial language-plaintext">{snippet}</code>
       </pre>
-    </div>
+    </section>
   );
 };
 
