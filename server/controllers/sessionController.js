@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const db = require("../models/snippetModel");
 const secret = "thisisasecret";
 
 const sessionController = {};

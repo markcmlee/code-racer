@@ -16,12 +16,12 @@ module.exports = {
     hot: true,
     publicPath: "/build/",
     port: 8080,
-    // proxy: [
-    //   {
-    //     context: ["/"],
-    //     target: "http://localhost:3000",
-    //   },
-    // ],
+    proxy: {
+      "/callback": "http://localhost:3000",
+      "/api": "http://localhost:3000",
+      "/verify": "http://localhost:3000",
+      "/game": "http://localhost:3000",
+    },
   },
   plugins: [
     new MiniCssExtractPlugin(),
