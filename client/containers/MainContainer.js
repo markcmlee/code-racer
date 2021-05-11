@@ -1,11 +1,13 @@
 import fetch from "node-fetch";
 import React, { useState, useEffect, useContext } from "react";
+import { io } from "socket.io-client";
 import NavBar from "../components/NavBar";
 import CodeSnippet from "../components/CodeSnippet";
 import InputField from "../components/InputField";
 import PlayerProgress from "../components/PlayerProgress";
 import { SnippetContext } from "../components/SnippetContext";
 
+const socket = io.connect();
 // Basic throttle to limit the number of fetches to get a snippet
 const throttle = (func, limit) => {
   let shouldWait;
@@ -21,8 +23,15 @@ const throttle = (func, limit) => {
 const MainContainer = () => {
   const [categories, setCategories] = useState([]);
   const [raceStarted, setRaceStarted] = useState(false);
+  const { chooseSnippet } = useContext(SnippetContext);
 
-  const { chooseSnippet, activeRace } = useContext(SnippetContext);
+  socket.on("newScores", (scores) => {
+    // update scores
+  });
+
+  socket.on("mySocketId", (socketId) => {
+    console.log("my socket id", socketId);
+  });
 
   // Gets categories on load
   useEffect(() => {
@@ -48,7 +57,7 @@ const MainContainer = () => {
   };
 
   return (
-    <div className="mainContainer">
+    <div className="crt mainContainer">
       <h1 className="mainTitle">CODERACER</h1>
       <NavBar
         raceStarted={raceStarted}

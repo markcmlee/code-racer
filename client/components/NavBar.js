@@ -9,7 +9,12 @@ const NavBar = (props) => {
 
   if (!activeRace && !raceStarted) {
     navCategories = categories.map((category, i) => (
-      <li key={`category${i}`} id={`category${i}`} onClick={fetchSnippet}>
+      <li
+        className={"crtSpecial"}
+        key={`category${i}`}
+        id={`category${i}`}
+        onClick={fetchSnippet}
+      >
         {category}
       </li>
     ));

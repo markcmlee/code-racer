@@ -69,22 +69,20 @@ const InputField = React.memo((props) => {
         readOnly={!activeRace}
       ></textarea>
     );
-  }
-  // else if (!activeCountDown && activeRace) {
-  //   textArea = (
-  //     <textarea
-  //       id="textInput"
-  //       placeholder="GET READY!"
-  //       onKeyDown={(e) => disableTab(e)}
-  //       onInput={(e) => {
-  //         checkInput({ input: e.target.value });
-  //         checkForError({ input: e });
-  //         setWPM();
-  //       }}
-  //     ></textarea>
-  //   );
-  // }
-  else {
+  } else if (snippet.length !== 0 && activeCountDown) {
+    textArea = (
+      <textarea
+        id="textInput"
+        placeholder="GET READY!"
+        onKeyDown={(e) => disableTab(e)}
+        onInput={(e) => {
+          checkInput({ input: e.target.value });
+          checkForError({ input: e });
+          setWPM();
+        }}
+      ></textarea>
+    );
+  } else {
     textArea = (
       <textarea
         id="textInput"

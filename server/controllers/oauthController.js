@@ -4,14 +4,14 @@ const oauthController = {};
 
 oauthController.getGithubToken = (req, res, next) => {
   fetch("https://github.com/login/oauth/access_token", {
-    method: "POST",
+    method: "post",
     headers: {
-      "Content-Type": "Application/JSON",
-      Accept: "Application/JSON",
+      "Content-Type": "application/json",
+      Accept: "application/json",
     },
     body: JSON.stringify({
-      client_id: "948a135d475ed14f4d43",
-      client_secret: "3e04f857629b5f66f1d2f4cb5a1c32f5b61190ea",
+      client_id: "ea720a623e0e14d358e4",
+      client_secret: "79d4ed0c6b8685064627e9906de83418b7c18529",
       code: req.query.code,
     }),
   })

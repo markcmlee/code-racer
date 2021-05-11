@@ -5,7 +5,10 @@ const webpack = require("webpack");
 
 module.exports = {
   mode,
-  entry: ["./client/index.js"],
+  entry: {
+    main: path.join(__dirname, "./client/index.js"),
+    // main: path.join(__dirname, "./build/bundle.js"),
+  },
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "bundle.js",

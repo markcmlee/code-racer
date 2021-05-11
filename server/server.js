@@ -1,75 +1,87 @@
 const express = require("express");
 const path = require("path");
 const cookieparser = require("cookie-parser");
-const socket = require("socket.io");
+// const socket = require("socket.io");
+const cors = require("cors");
 
 const sessionController = require("./controllers/sessionController");
 const oauthController = require("./controllers/oauthController");
+const apiRouter = require("./routes/api");
 
 const app = express();
 const PORT = 3000;
-const apiRouter = require("./routes/api");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieparser());
+// app.use(cors());
 
-app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
-
-// const server = app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+const httpServer = require("http").createServer(app);
+// const io = require("socket.io").listen(httpServer);
+const io = require("socket.io")(httpServer);
+// const server = app.listen(PORT, () => console.log("listening on port 3000"));
 // const io = socket(server);
 
-// io.on("connect", (socket) => {
-//   socket.emit("mySocketId", socket.id, () =>
-//     console.log("socket connection made!")
-//   );
+io.sockets.on("connection", (socket) => {
+  console.log("INSIDE IO CONNECTION");
 
-//   socket.emit("newWPM", (newWPM) => {
-//     console.log(newWPM);
-//     socket.broadcast.emit("newScores", newWPM);
-//   });
+  socket.emit("mySocketId", socket.id, () =>
+    console.log("socket connection made!")
+  );
 
-//   socket.on("disconnect", () => console.log("user disconnected!"));
-// });
+  // socket.on("newWPM", (newWPM) => {
+  //   console.log(newWPM);
+  //   socket.broadcast.emit("newScores", newWPM);
+  // });
+
+  socket.on("disconnect", () => console.log("user disconnected!"));
+});
+
+httpServer.listen(PORT);
+
+app.use("/build", express.static(path.join(__dirname, "../build")));
+// serve index.html on the route '/'
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../index.html"));
+});
+// }
 
 // if (process.env.NODE_ENV === 'production') {
-//   app.use('/build', express.static(path.join(__dirname, '../build')));
-//   // serve index.html on the route '/'
-//   app.get('/', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../index.html'));
-//   });
-// }
+
+//Oauth flow for github
+app.get(
+  "/callback",
+  oauthController.getGithubToken,
+  oauthController.getUser,
+  sessionController.createSession,
+  (req, res) => {
+    // if (process.env.NODE_ENV === "development") {
+    // console.log("WE ARE IN DEV ENVIRONMENT")
+    // res.status(200).send();
+    // res.redirect("/game");
+    // } else {
+    res.status(200).sendFile(path.join(__dirname, "../index.html"));
+    // }
+  }
+);
+
+// end of production mode stuff.
 app.get("/", (req, res) => {
   res.status(200).sendFile(path.resolve(__dirname, "../index.html"));
 });
 
-// // Github oAuth flow
-// app.get(
-//   "/callback",
-//   oauthController.getGithubToken,
-//   oauthController.getUser,
-//   oauthController.createSession,
-//   (req, res) => {
-//     if (process.env.NODE_ENV === "development") {
-//       res.redirect("localhost:8080");
-//     } else {
-//       res.sendFile(path.join(__dirname, "../index.html"));
-//     }
-//   }
-// );
-
 // used to check the user's JWT.
-app.get("/game", (req, res) => {
-  res.status(200).sendFile(path.resolve(__dirname, "../index.html"));
-});
+// app.get("/game", (req, res) => {
+//   res.status(200).sendFile(path.resolve(__dirname, "../index.html"));
+// });
 
 app.get(
   "/verify",
   sessionController.verify,
   // userController.loginUser,
   (req, res, next) => {
-    console.log("do we verify???");
-    res.redirect(301, "/game");
+    // res.redirect(301, "/game");
+    res.status(200).send();
   }
 );
 

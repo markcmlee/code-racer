@@ -46,11 +46,6 @@ const CodeSnippet = (props) => {
     }
   }
 
-  useEffect(() => {
-    console.log("status of raceFinished", raceFinished);
-    console.log("MEANING AT THE END", meaning);
-  }, [raceFinished]);
-
   return (
     <pre id="snippet">
       <code className="crtSpecial language-plaintext">

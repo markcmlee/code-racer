@@ -28,7 +28,6 @@
 
 .navBar {
   font-family: "Michroma", sans-serif;
-  // width: auto;
   display: flex;
   margin-top: 0;
   #categories {
@@ -100,13 +99,13 @@
     inset 0px 0px 15px 1px $cyanTron;
   border-radius: 6px;
   width: 80vw;
-  height: 50vh;
+  height: 55vh;
   min-width: 80vw;
-  min-height: 50vh;
+  min-height: 55vh;
   margin-top: 25px;
   overflow: auto;
   text-align: left;
-  padding: 25px;
+  padding: 20px;
   font-size: 19px;
   flex-direction: column;
   justify-content: space-between;
@@ -152,12 +151,12 @@
     inset 0px 0px 15px 1px $cyanTron;
   border-radius: 6px;
   width: 80vw;
-  height: 50vh;
+  height: 55vh;
   min-width: 80vw;
-  min-height: 50vh;
+  min-height: 55vh;
   margin-top: 25px;
   text-align: left;
-  padding: 25px;
+  padding: 20px;
   font-size: 18px;
   flex-direction: row !important;
   justify-content: space-between !important;
@@ -170,7 +169,8 @@
     width: 50%;
 
     h4 {
-      font-family: sans-serif;
+      color: $orangeTron;
+      text-shadow: -1px 1px 10px $eightiesPink;
     }
 
     p {
@@ -190,6 +190,12 @@
     border-left: 1px solid $cyanTron;
     word-break: normal;
 
+    h4 {
+      font-family: Michroma;
+      color: $orangeTron;
+      text-shadow: -1px 1px 10px $eightiesPink;
+    }
+
     p {
       height: auto;
       width: auto;
@@ -202,8 +208,10 @@
 .playerProgress {
   height: 20px;
   width: 100%;
-  background-color: #e0e0de;
-  border-radius: 5px;
+  background-color: $basestar;
+  border-radius: 8px;
+  box-shadow: 0px 0px 15px 2px lighten($progressBar, 10%),
+    inset 0px 0px 15px 1px $basestar;
 }
 
 .inputContainer {

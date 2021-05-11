@@ -1,8 +1,11 @@
 .login {
+  height: 100% !important;
+  width: 100% !important;
   display: flex;
   font-family: "Michroma", sans-serif;
   justify-content: center;
   margin-top: 8em;
+  overflow: hidden !important;
 }
 
 .message {
@@ -18,7 +21,7 @@
   min-height: 600;
   min-width: 500;
   width: auto;
-  justify-content: space-around;
+  justify-content: flex-start;
   padding-left: 40px;
   padding-right: 40px;
 
@@ -40,7 +43,6 @@
     border-radius: 6px;
     background-color: darken($yellowTron, 5%);
     display: flex;
-    justify-content: flex-start;
     color: $buttonColor;
     width: 180px;
     height: 60px;
@@ -64,94 +66,30 @@
     }
 
     .githubButton {
-      user-select: none;
       text-decoration: none;
       width: 100%;
       align-items: center;
       color: inherit;
       font-size: 100%;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       span {
+        user-select: none;
+        pointer-events: none;
         width: 1fr;
         font-weight: 800;
       }
-      :hover {
-        background-color: $lightblueTron;
-        border-radius: 6px;
-        box-shadow: 0px 0px 8px 2px $cyanTron;
+      .githubIcon {
+        pointer-events: none;
+        fill: inherit;
+        margin-left: 10px;
+        margin-right: 10px;
       }
 
       &:active {
         fill: $lightblueTron;
         color: $lightblueTron;
       }
-    }
-  }
-}
-
-.githubButtonText {
-  user-select: none;
-  text-decoration: none;
-  display: flex;
-  font-size: 100%;
-  justify-content: center;
-  align-items: center;
-  padding: auto;
-  margin: auto;
-  color: inherit;
-  &:active {
-    fill: $lightblueTron;
-    color: $lightblueTron;
-  }
-}
-
-.popup {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-
-  /* Toggle this class - hide and show the popup */
-  .popuptext {
-    visibility: hidden;
-    width: 160px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 8px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -80px;
-  }
-
-  .show {
-    visibility: visible;
-    -webkit-animation: fadeIn 1s;
-    animation: fadeIn 1s;
-  }
-  /* Add animation (fade in the popup) */
-  @-webkit-keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
     }
   }
 }
