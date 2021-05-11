@@ -15,12 +15,10 @@ const App = () => {
 
   return (
     <Router>
-      <div className="containers">
-        <Switch>
-          <Route exact path="/" component={LoginContainer} />
-          <Route exact path="/game" component={MainContainer} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path="/" component={LoginContainer} />
+        <Route exact path="/game" component={MainContainer} />
+      </Switch>
     </Router>
   );
 };

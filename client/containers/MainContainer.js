@@ -3,8 +3,10 @@ import React, { useState, useEffect, useContext } from "react";
 import NavBar from "../components/NavBar";
 import CodeSnippet from "../components/CodeSnippet";
 import InputField from "../components/InputField";
+import PlayerProgress from "../components/PlayerProgress";
 import { SnippetContext } from "../components/SnippetContext";
 
+// Basic throttle to limit the number of fetches to get a snippet
 const throttle = (func, limit) => {
   let shouldWait;
   return function (...args) {
@@ -20,13 +22,7 @@ const MainContainer = () => {
   const [categories, setCategories] = useState([]);
   const [raceStarted, setRaceStarted] = useState(false);
 
-  const {
-    chooseSnippet,
-    snippet,
-    snippetWords,
-    meaning,
-    lastInput,
-  } = useContext(SnippetContext);
+  const { chooseSnippet, activeRace } = useContext(SnippetContext);
 
   // Gets categories on load
   useEffect(() => {
@@ -51,24 +47,17 @@ const MainContainer = () => {
       });
   };
 
-  // useEffect(() => {
-  //   // console.log(snippetWords);
-  //   // console.log(meaning);
-  //   console.log(lastInput);
-  // }, [lastInput]);
-
   return (
-    <div>
+    <div className="mainContainer">
+      <h1 className="mainTitle">CODERACER</h1>
       <NavBar
         raceStarted={raceStarted}
         categories={categories}
         fetchSnippet={throttle(fetchSnippet, 500)}
       />
       <CodeSnippet />
-      <InputField
-        toggleRaceStarted={() => setRaceStarted((el) => !el)}
-        raceStarted={raceStarted}
-      />
+      {/* <PlayerProgress /> */}
+      <InputField setRaceStarted={setRaceStarted} raceStarted={raceStarted} />
     </div>
   );
 };

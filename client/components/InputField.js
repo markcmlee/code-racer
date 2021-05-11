@@ -1,27 +1,44 @@
 import React, { useState, useEffect, useContext } from "react";
+import PlayerProgress from "./PlayerProgress";
 import { SnippetContext } from "./SnippetContext";
 
-const InputField = (props) => {
-  const { snippet, checkForError } = useContext(SnippetContext);
-  const { toggleRaceStarted, raceStarted } = props;
+const InputField = React.memo((props) => {
+  const {
+    snippet,
+    checkInput,
+    checkForError,
+    setActiveRace,
+    activeRace,
+    setStartTime,
+    setWPM,
+  } = useContext(SnippetContext);
+  const { raceStarted, setRaceStarted } = props;
   const [activeCountdown, setActiveCountdown] = useState(false);
   const [countDown, setCountDown] = useState(null);
 
+  const disableTab = (e) => {
+    if (e.key === "Tab") e.preventDefault();
+  };
+
+  // Begin Countdown and the useEffect below activate the 5 second timer to start the game
   const beginCountdown = () => {
     if (raceStarted || activeCountdown) return;
     setActiveCountdown((active) => (active = true));
-    toggleRaceStarted();
+    setRaceStarted(true);
     setCountDown(5);
   };
 
   useEffect(() => {
     if (activeCountdown) {
       document.getElementById("timer").innerHTML = `Starts in ... ${countDown}`;
-      if (countDown == 0) {
+      if (countDown === 0) {
         setCountDown(null);
         setActiveCountdown(false);
-        toggleRaceStarted();
+        setRaceStarted(false);
         document.getElementById("timer").innerHTML = `GO!`;
+        setActiveRace({ boolean: true });
+        const time = Date.now();
+        setStartTime({ time });
       }
       if (!countDown) return;
 
@@ -33,6 +50,7 @@ const InputField = (props) => {
     }
   }, [countDown]);
 
+  // Conditional rendering of textArea depending on game state (active/inactive)
   let textArea;
   if (snippet.length !== 0) {
     textArea = (
@@ -40,12 +58,33 @@ const InputField = (props) => {
         id="textInput"
         onFocus={beginCountdown}
         placeholder="Click here to start the race!"
+        onKeyDown={(e) => disableTab(e)}
         onInput={(e) => {
-          checkForError({ input: e.target.value });
+          if (activeRace) {
+            checkInput({ input: e.target.value });
+            checkForError({ input: e });
+            setWPM();
+          }
         }}
+        readOnly={!activeRace}
       ></textarea>
     );
-  } else {
+  }
+  // else if (!activeCountDown && activeRace) {
+  //   textArea = (
+  //     <textarea
+  //       id="textInput"
+  //       placeholder="GET READY!"
+  //       onKeyDown={(e) => disableTab(e)}
+  //       onInput={(e) => {
+  //         checkInput({ input: e.target.value });
+  //         checkForError({ input: e });
+  //         setWPM();
+  //       }}
+  //     ></textarea>
+  //   );
+  // }
+  else {
     textArea = (
       <textarea
         id="textInput"
@@ -64,6 +103,6 @@ const InputField = (props) => {
       <p id="currentWPM"></p>
     </section>
   );
-};
+});
 
 export default InputField;

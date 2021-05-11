@@ -8,10 +8,11 @@
 
   .mainTitle {
     // TRY TO MAKE THIS METAL REFLECTIVE
+    font-size: 7vw;
+    margin-top: 0 !important;
+    margin-bottom: 10px !important;
     font-family: "Faster One", cursive;
-    font-size: 9vw;
     font-weight: lighter;
-    margin-top: none;
     background: -webkit-linear-gradient(
       $eightiesYellow 30%,
       $eightiesOrange,
@@ -25,24 +26,17 @@
   }
 }
 
-// .navBarContainer{
-// border: 1px solid $lightblueTron;
-
 .navBar {
-  // border: 1px solid $lightblueTron;
   font-family: "Michroma", sans-serif;
-  width: 100%;
+  // width: auto;
   display: flex;
-  justify-content: center;
-  width: auto;
-  display: flex;
-
+  margin-top: 0;
   #categories {
-    // border: 1px solid $lightblueTron;
     display: flex;
     list-style: none;
     padding: 0;
     margin: 0;
+    font-size: 1em;
     :nth-child(1) {
       border-top-left-radius: 5px;
       border-bottom-left-radius: 5px;
@@ -98,9 +92,8 @@
   }
 }
 
-// }
-
-.snippetContainer {
+#snippet {
+  display: flex;
   box-sizing: border-box;
   border: 1px solid $lightblueTron;
   box-shadow: 0px 0px 15px 2px lighten($cyanTron, 10%),
@@ -108,72 +101,125 @@
   border-radius: 6px;
   width: 80vw;
   height: 50vh;
-  min-width: 700px;
-  min-height: 200px;
-  margin-top: 2em;
-  // display: flex;
-  overflow-y: auto;
-  // flex-direction: row;
+  min-width: 80vw;
+  min-height: 50vh;
+  margin-top: 25px;
+  overflow: auto;
+  text-align: left;
+  padding: 25px;
+  font-size: 19px;
+  flex-direction: column;
+  justify-content: space-between;
 
-  #snippet {
-    height: 100%;
-    width: 100%;
-    // display: flex;
-    // flex-wrap: wrap;
-    // flex-basis: auto;
+  .green {
+    color: $eightiesCyan;
+  }
+
+  .red {
+    color: $eightiesPink;
+  }
+
+  .underline {
+    border-bottom: 1px solid $cyanTron;
+  }
+
+  .word {
+    margin-right: 8px;
+    font-family: monospace;
+  }
+
+  #snippetText {
+    display: flex;
+    user-select: none;
+  }
+
+  #noText {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    text-align: center;
+    font-family: monospace;
+    font-size: 2rem;
+    user-select: none;
+  }
+}
+
+#snippetFinished {
+  display: flex;
+  box-sizing: border-box;
+  border: 1px solid $lightblueTron;
+  box-shadow: 0px 0px 15px 2px lighten($cyanTron, 10%),
+    inset 0px 0px 15px 1px $cyanTron;
+  border-radius: 6px;
+  width: 80vw;
+  height: 50vh;
+  min-width: 80vw;
+  min-height: 50vh;
+  margin-top: 25px;
+  text-align: left;
+  padding: 25px;
+  font-size: 18px;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+
+  .leftCode {
+    display: flex;
+    flex-direction: column;
+    padding-top: none;
     text-align: left;
-    box-sizing: border-box;
-    padding-left: 20px;
-    padding-right: 20px;
-    font-size: 18px;
+    width: 50%;
 
-    .green {
-      color: $eightiesCyan;
+    h4 {
+      font-family: sans-serif;
     }
 
-    .red {
-      // background-color: $eightiesPink;
-      color: $eightiesPink;
+    p {
+      width: 100%;
+      word-wrap: normal;
     }
+  }
 
-    .underline {
-      border-bottom: 1px solid $cyanTron;
-    }
+  .rightMeaning {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    padding-left: 25px;
+    padding-top: none;
+    width: 50%;
+    text-align: left;
+    border-left: 1px solid $cyanTron;
+    word-break: normal;
 
-    .word {
-      margin-right: 8px;
-      font-family: monospace;
-    }
-
-    #snippetText {
-      display: flex;
-      user-select: none;
-    }
-
-    #noText {
-      text-align: center;
-      font-family: monospace;
-      font-size: 30px;
-      user-select: none;
+    p {
+      height: auto;
+      width: auto;
+      display: inline-block;
+      word-break: normal;
     }
   }
 }
 
+.playerProgress {
+  height: 20px;
+  width: 100%;
+  background-color: #e0e0de;
+  border-radius: 5px;
+}
+
 .inputContainer {
   display: flex;
-  padding: 2em;
   flex-direction: column;
   align-items: center;
   border: 1px solid $lightblueTron;
   border-radius: 6px;
   box-shadow: 0px 0px 15px 2px lighten($cyanTron, 10%),
     inset 0px 0px 15px 1px $cyanTron;
-  margin-top: 4em;
-  margin-bottom: 4em;
+  margin-top: 10px;
   width: 50vw;
   min-width: 500px;
 
   #timer {
+    padding-top: 10px;
     box-sizing: border-box;
     width: auto;
     height: 2em;
@@ -197,16 +243,4 @@
       text-align: center;
     }
   }
-}
-
-.playerProgress {
-  box-sizing: border-box;
-  border: 1px solid $lightblueTron;
-  box-shadow: 0px 0px 15px 2px lighten($cyanTron, 10%),
-    inset 0px 0px 15px 1px $cyanTron;
-  border-radius: 6px;
-  text-align: center;
-  width: 30vw;
-  min-height: 100px;
-  margin-top: 2em;
 }
