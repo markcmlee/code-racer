@@ -1,6 +1,3 @@
-// Same as SnippetContext2
-// Working on Websockets here in case changes need to be made
-
 import React, { useReducer, createContext, useCallback } from "react";
 import id from "uuid/v4";
 export const SnippetContext = createContext();

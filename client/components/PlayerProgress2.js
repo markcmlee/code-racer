@@ -1,6 +1,3 @@
-// Same as PlayerProgress2
-// Working on Websockets here in case changes need to be made
-
 import React, { useState, useEffect, useContext } from "react";
 import { SnippetContext } from "./SnippetContext";
 
