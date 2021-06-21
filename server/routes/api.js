@@ -21,8 +21,8 @@ router.get("/snippet", snippetController.getSnippet, (req, res, next) =>
 //   (req, res, next) => res.status(200).json(res.locals.scoreBoardResponse)
 // );
 
-router.post("/backdoor", snippetController.createDatabase, (req, res, next) =>
-  res.status(200).send()
-);
+// router.post("/backdoor", snippetController.createDatabase, (req, res, next) =>
+//   res.status(200).send()
+// );
 
 module.exports = router;

@@ -2,3 +2,8 @@ node_modules
 package-lock.json
 server/models/coderacerModel.js
 server/controllers/snippets.txt
+authorized_keys.txt
+coderacer.me.txt
+server/server2.js
+todo.txt
+git_ignore
